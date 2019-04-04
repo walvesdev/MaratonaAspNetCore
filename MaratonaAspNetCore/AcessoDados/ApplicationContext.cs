@@ -9,6 +9,7 @@ namespace ProjetoBase.AcessoDados
     {
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<TipoProduto> TipoProdutos { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
@@ -30,6 +31,7 @@ namespace ProjetoBase.AcessoDados
             modelBuilder.HasDefaultSchema("MANC");
             modelBuilder.ApplyConfiguration(new ProdutoTypeConfiguration());
             modelBuilder.ApplyConfiguration(new TipoProdutoTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new UsuariosTypeConfiguration());
         }
     }
 }

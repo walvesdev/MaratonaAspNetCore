@@ -11,9 +11,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MaratonaAspNetCore.Services.Filters;
 using MaratonaAspNetCore.Models.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MaratonaAspNetCore.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProdutosController : Controller
     {
         private readonly ProdutoRepositorio banco;

@@ -4,6 +4,7 @@ using FluentValidation.AspNetCore;
 using MaratonaAspNetCore.Dados.AcessoDados.Repositorios;
 using MaratonaAspNetCore.Models.Model;
 using MaratonaAspNetCore.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
@@ -28,9 +29,15 @@ namespace MaratonaAspNetCore
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(opt => 
+            {
+                opt.LoginPath = "/Conta/Login";
+            });
+
             services.AddTransient<ApplicationContext>();
             services.AddTransient<DBInitializer>();
             services.AddTransient<ProdutoRepositorio>();
+            services.AddTransient<UsuarioRepositorio>();
             services.AddTransient<TipoProdutoRepositorio>();
 
             services.AddDataProtection().UnprotectKeysWithAnyCertificate();
@@ -66,6 +73,7 @@ namespace MaratonaAspNetCore
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
