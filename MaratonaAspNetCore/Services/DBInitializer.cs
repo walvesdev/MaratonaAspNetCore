@@ -1,5 +1,5 @@
 ﻿using MaratonaAspNetCore.Dados.AcessoDados.Repositorios;
-using MaratonaAspNetCore.Models;
+using MaratonaAspNetCore.Models.Model;
 using Microsoft.EntityFrameworkCore;
 using ProjetoBase.AcessoDados;
 using System;

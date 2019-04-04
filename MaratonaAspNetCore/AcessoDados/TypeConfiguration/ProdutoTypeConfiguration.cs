@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MaratonaAspNetCore.Models;
+using MaratonaAspNetCore.Models.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,9 +13,10 @@ namespace MaratonaAspNetCore.Dados.AcessoDados.TypeConfiguration
         {
             builder.ToTable("Produto");
             builder.HasKey(p => p.Id);
-            builder.HasOne(p => p.Tipo).WithMany(t => t.Produtos).HasForeignKey(p => p.TipoProdutoId);//.OnDelete(DeleteBehavior.Restrict);
-            //builder.Property(p => p.Nome).HasColumnType("varchar").HasMaxLength(100).IsRequired();
-            builder.Property(p => p.Valor).HasColumnType("money");
+            builder.HasOne(p => p.Tipo).WithMany(t => t.Produtos).HasForeignKey(p => p.TipoProdutoId).OnDelete(DeleteBehavior.ClientSetNull);
+            builder.Property(p => p.Nome).HasColumnType("Varchar(100)").IsRequired();
+            builder.Property(p => p.Descricao).HasColumnType("Varchar(300)");
+            builder.Property(p => p.Valor).HasColumnType("decimal(18, 2)");
 
         }
     }

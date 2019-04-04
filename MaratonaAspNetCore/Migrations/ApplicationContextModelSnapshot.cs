@@ -28,12 +28,17 @@ namespace MaratonaAspNetCore.Migrations
 
                     b.Property<DateTime>("DataCriacao");
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Descricao")
+                        .HasColumnType("Varchar(300)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("Varchar(100)");
 
                     b.Property<int>("TipoProdutoId");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("money");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.HasKey("Id");
 
@@ -50,7 +55,9 @@ namespace MaratonaAspNetCore.Migrations
 
                     b.Property<DateTime>("DataCriacao");
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("Varchar(100)");
 
                     b.HasKey("Id");
 
@@ -61,8 +68,7 @@ namespace MaratonaAspNetCore.Migrations
                 {
                     b.HasOne("MaratonaAspNetCore.Models.TipoProduto", "Tipo")
                         .WithMany("Produtos")
-                        .HasForeignKey("TipoProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TipoProdutoId");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MaratonaAspNetCore.AcessoDados.TypeConfiguration;
 using MaratonaAspNetCore.Dados.AcessoDados.TypeConfiguration;
-using MaratonaAspNetCore.Models;
+using MaratonaAspNetCore.Models.Model;
 
 namespace ProjetoBase.AcessoDados
 {

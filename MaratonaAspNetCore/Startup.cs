@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MaratonaAspNetCore.AcessoDados;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using MaratonaAspNetCore.Dados.AcessoDados.Repositorios;
+using MaratonaAspNetCore.Models.Model;
 using MaratonaAspNetCore.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProjetoBase.AcessoDados;
+using ProjetoBaseMVC.Model.Validations;
 
 namespace MaratonaAspNetCore
 {
@@ -32,6 +32,11 @@ namespace MaratonaAspNetCore
             services.AddTransient<DBInitializer>();
             services.AddTransient<ProdutoRepositorio>();
             services.AddTransient<TipoProdutoRepositorio>();
+
+            services.AddDataProtection().UnprotectKeysWithAnyCertificate();
+
+            services.AddMvc().AddFluentValidation();
+            services.AddTransient<IValidator<Produto>, ProdutoValidator>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -66,7 +71,7 @@ namespace MaratonaAspNetCore
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Produtos}/{action=Index}/{id?}");
             });
 
             serviceProvider.GetService<DBInitializer>().Init();

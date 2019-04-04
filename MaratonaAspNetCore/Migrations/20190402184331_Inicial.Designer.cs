@@ -10,8 +10,8 @@ using ProjetoBase.AcessoDados;
 namespace MaratonaAspNetCore.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20190402174646_Teste")]
-    partial class Teste
+    [Migration("20190402184331_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,13 +32,12 @@ namespace MaratonaAspNetCore.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("varchar")
-                        .HasMaxLength(100);
+                        .HasColumnType("Varchar(100)");
 
                     b.Property<int>("TipoProdutoId");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("money");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.HasKey("Id");
 
@@ -55,7 +54,9 @@ namespace MaratonaAspNetCore.Migrations
 
                     b.Property<DateTime>("DataCriacao");
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("Varchar(100)");
 
                     b.HasKey("Id");
 
@@ -66,8 +67,7 @@ namespace MaratonaAspNetCore.Migrations
                 {
                     b.HasOne("MaratonaAspNetCore.Models.TipoProduto", "Tipo")
                         .WithMany("Produtos")
-                        .HasForeignKey("TipoProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TipoProdutoId");
                 });
 #pragma warning restore 612, 618
         }

@@ -19,7 +19,7 @@ namespace MaratonaAspNetCore.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DataCriacao = table.Column<DateTime>(nullable: false),
-                    Nome = table.Column<string>(type: "varchar", maxLength: 100, nullable: false)
+                    Nome = table.Column<string>(type: "Varchar(100)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -34,8 +34,8 @@ namespace MaratonaAspNetCore.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DataCriacao = table.Column<DateTime>(nullable: false),
-                    Nome = table.Column<string>(type: "varchar", maxLength: 100, nullable: false),
-                    Valor = table.Column<decimal>(type: "money", nullable: false),
+                    Nome = table.Column<string>(type: "Varchar(100)", nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
                     TipoProdutoId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -47,7 +47,7 @@ namespace MaratonaAspNetCore.Migrations
                         principalSchema: "MANC",
                         principalTable: "TipoProduto",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

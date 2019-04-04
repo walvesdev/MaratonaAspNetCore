@@ -26,6 +26,11 @@ namespace ProjetoBase.AcessoDados.Repositorios
         {
             context.Remove(entidade);
         }
+        public void ExcluirPorId(TId id)
+        {
+            var entidade = context.Set<T>().Find(id);
+            context.Remove(entidade);
+        }
 
         public void Inserir(T entidade)
         {

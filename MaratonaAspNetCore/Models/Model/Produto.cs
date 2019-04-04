@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaratonaAspNetCore.Models
+namespace MaratonaAspNetCore.Models.Model
 {
     public class Produto : Entidade
     {
@@ -12,6 +12,7 @@ namespace MaratonaAspNetCore.Models
         public decimal Valor { get; set; }
         public int TipoProdutoId { get; set; }
         public TipoProduto Tipo { get; set; }
+        public string Descricao { get; set; }
 
     }
 }

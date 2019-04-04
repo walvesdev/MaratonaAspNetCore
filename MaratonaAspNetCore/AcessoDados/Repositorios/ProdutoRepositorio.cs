@@ -1,6 +1,6 @@
 ﻿using ProjetoBase.AcessoDados;
 using ProjetoBase.AcessoDados.Repositorios;
-using MaratonaAspNetCore.Models;
+using MaratonaAspNetCore.Models.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;

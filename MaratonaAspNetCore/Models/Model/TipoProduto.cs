@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaratonaAspNetCore.Models
+namespace MaratonaAspNetCore.Models.Model
 {
     public class TipoProduto : Entidade
     {

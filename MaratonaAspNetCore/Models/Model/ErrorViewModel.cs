@@ -1,6 +1,6 @@
 using System;
 
-namespace MaratonaAspNetCore.Models
+namespace MaratonaAspNetCore.Models.Model
 {
     public class ErrorViewModel
     {
