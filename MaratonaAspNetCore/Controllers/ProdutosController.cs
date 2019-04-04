@@ -44,7 +44,6 @@ namespace MaratonaAspNetCore.Controllers
             if (id != null)
             {
                 produto = banco.SelecionarPorId(id);
-                return RedirectToAction(nameof(ProdutosController.Index));
             }
 
             return View(produto);
@@ -55,10 +54,21 @@ namespace MaratonaAspNetCore.Controllers
         {
             if (ModelState.IsValid)
             {
-                banco.Inserir(produto);
-                banco.SalvarAlteracoes();
+                if (produto.Id == 0)
+                {
+                    banco.Inserir(produto);
+                    banco.SalvarAlteracoes();
 
-                return RedirectToAction(nameof(ProdutosController.Index));
+                    return RedirectToAction(nameof(ProdutosController.Index));
+                }
+                else
+                {
+                    banco.Atualizar(produto);
+                    banco.SalvarAlteracoes();
+
+                    return RedirectToAction(nameof(ProdutosController.Index));
+                }
+                
             }
 
             var listaTipos = banco_tipo.SelecionarTodos().Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Nome }).ToList();
