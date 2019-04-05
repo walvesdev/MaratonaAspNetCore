@@ -15,11 +15,13 @@ namespace MaratonaAspNetCore.Services
     {
         private readonly ProdutoRepositorio produtoRepositorio;
         private readonly UsuarioRepositorio usuarioRepositorio;
+        private readonly PermissaoUsuarioRepositorio permissaoUsuarioRepositorio;
 
-        public DBInitializer(ProdutoRepositorio produtoRepositorio, UsuarioRepositorio usuarioRepositorio)
+        public DBInitializer(ProdutoRepositorio produtoRepositorio, UsuarioRepositorio usuarioRepositorio, PermissaoUsuarioRepositorio permissaoUsuarioRepositorio)
         {
             this.produtoRepositorio = produtoRepositorio;
             this.usuarioRepositorio = usuarioRepositorio;
+            this.permissaoUsuarioRepositorio = permissaoUsuarioRepositorio;
         }
 
         public void Init()
@@ -43,12 +45,19 @@ namespace MaratonaAspNetCore.Services
                 produtoRepositorio.SalvarAlteracoes();
             }
 
-            if (!usuarioRepositorio.SelecionarTodos().Any())
+
+
+            if ((!usuarioRepositorio.SelecionarTodos().Any()) && (!permissaoUsuarioRepositorio.SelecionarTodos().Any()))
             {
+                var admin = new PermissaoUsuario() { NivelAcesso = "Admin" };
+                var usuario = new PermissaoUsuario() { NivelAcesso = "Usuario" };
+                var master = new PermissaoUsuario() { NivelAcesso = "Master" };
+                
                 usuarioRepositorio.dbset.AddRange(new List<Usuario>
                 {
-                    new Usuario() { Nome = "Willian Alves", NomeLogin = "walvesdev", Email = "walvesdev@email.com", Permissao = "Usuario", Senha = "123456".Encrypt()},
-                    new Usuario() { Nome = "Administrador", NomeLogin = "admin", Email = "admin@email.com", Permissao = "Admin", Senha = "123456".Encrypt() }
+                    new Usuario() { Nome = "Willian Alves", NomeLogin = "walvesdev", Email = "walvesdev@email.com", Permissao = usuario, Senha = "123456".Encrypt()},
+                    new Usuario() { Nome = "Administrador", NomeLogin = "admin", Email = "admin@email.com", Permissao = admin, Senha = "123456".Encrypt() },
+                    new Usuario() { Nome = "Master", NomeLogin = "master", Email = "master@email.com", Permissao = master, Senha = "123456".Encrypt() }
 
             });
                 usuarioRepositorio.SalvarAlteracoes();

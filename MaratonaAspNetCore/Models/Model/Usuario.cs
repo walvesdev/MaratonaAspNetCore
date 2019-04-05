@@ -11,7 +11,8 @@ namespace MaratonaAspNetCore.Models.Model
         public string Nome { get; set; }
         public string Email { get; set; }
         public string NomeLogin { get; set; }
-        public string Permissao { get; set; }
+        public int PermissaoUsuarioId { get; set; }
+        public PermissaoUsuario Permissao { get; set; }
         public string Senha { get; set; }
     }
 }

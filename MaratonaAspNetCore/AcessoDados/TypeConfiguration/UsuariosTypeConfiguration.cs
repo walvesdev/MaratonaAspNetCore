@@ -12,9 +12,9 @@ namespace ProjetoBase.AcessoDados
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Nome).HasColumnType("Varchar(100)").IsRequired();
             builder.Property(p => p.NomeLogin).HasColumnType("Varchar(50)").IsRequired();
-            builder.Property(p => p.Permissao).HasColumnType("Varchar(50)").IsRequired();
             builder.Property(p => p.Email).HasColumnType("Varchar(100)").IsRequired();
             builder.Property(p => p.Senha).HasColumnType("Varchar(100)").IsRequired();
+            builder.HasOne(p => p.Permissao).WithMany(u => u.Usuarios).OnDelete(DeleteBehavior.ClientSetNull).IsRequired();
 
 
         }

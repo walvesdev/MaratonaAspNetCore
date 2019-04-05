@@ -20,6 +20,21 @@ namespace MaratonaAspNetCore.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("MaratonaAspNetCore.Models.Model.PermissaoUsuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DataCriacao");
+
+                    b.Property<string>("NivelAcesso");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PermissaoUsuario");
+                });
+
             modelBuilder.Entity("MaratonaAspNetCore.Models.Model.Produto", b =>
                 {
                     b.Property<int>("Id")
@@ -84,15 +99,15 @@ namespace MaratonaAspNetCore.Migrations
                         .IsRequired()
                         .HasColumnType("Varchar(50)");
 
-                    b.Property<string>("Permissao")
-                        .IsRequired()
-                        .HasColumnType("Varchar(50)");
+                    b.Property<int>("PermissaoUsuarioId");
 
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("Varchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PermissaoUsuarioId");
 
                     b.ToTable("Usuarios");
                 });
@@ -102,6 +117,13 @@ namespace MaratonaAspNetCore.Migrations
                     b.HasOne("MaratonaAspNetCore.Models.Model.TipoProduto", "Tipo")
                         .WithMany("Produtos")
                         .HasForeignKey("TipoProdutoId");
+                });
+
+            modelBuilder.Entity("MaratonaAspNetCore.Models.Model.Usuario", b =>
+                {
+                    b.HasOne("MaratonaAspNetCore.Models.Model.PermissaoUsuario", "Permissao")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("PermissaoUsuarioId");
                 });
 #pragma warning restore 612, 618
         }

@@ -42,6 +42,7 @@ namespace MaratonaAspNetCore
             services.AddTransient<ProdutoRepositorio>();
             services.AddTransient<UsuarioRepositorio>();
             services.AddTransient<TipoProdutoRepositorio>();
+            services.AddTransient<PermissaoUsuarioRepositorio>();
 
             services.AddDataProtection().UnprotectKeysWithAnyCertificate();
 

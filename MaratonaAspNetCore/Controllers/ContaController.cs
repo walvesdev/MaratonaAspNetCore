@@ -16,10 +16,13 @@ namespace MaratonaAspNetCore.Controllers
     public class ContaController : Controller
     {
         private readonly UsuarioRepositorio banco;
+        private readonly PermissaoUsuarioRepositorio permissaoUsuarioRepositorio;
 
-        public ContaController(UsuarioRepositorio ctx)
+
+        public ContaController(UsuarioRepositorio ctx, PermissaoUsuarioRepositorio permissaoUsuarioRepositorio)
         {
             banco = ctx;
+            this.permissaoUsuarioRepositorio = permissaoUsuarioRepositorio;
         }
 
         public IActionResult Login(string returnUrl) => View(new LoginVM() { ReturnUrl = returnUrl});
@@ -49,12 +52,17 @@ namespace MaratonaAspNetCore.Controllers
 
             if (ModelState.IsValid)
             {
+                var permissao = permissaoUsuarioRepositorio.SelecionarPorId(usuario.PermissaoUsuarioId);
+
+
+
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, usuario.NomeLogin));
                 identity.AddClaim(new Claim(ClaimTypes.Name, usuario.Nome));
-                identity.AddClaim(new Claim(ClaimTypes.Role, usuario.Permissao));
+                identity.AddClaim(new Claim(ClaimTypes.Role, permissao.NivelAcesso));
 
                 var principal = new ClaimsPrincipal(identity);
+
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties()
                 {
                     IsPersistent = login.Lembrar
