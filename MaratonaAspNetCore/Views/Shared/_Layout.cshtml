@@ -20,47 +20,45 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MaratonaAspNetCore</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
+            <div class="container col-md-12">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WAS Tecnologia</a>
 
-                    <ul class="navbar-nav flex-grow-1 ml-auto">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Ola! @User.Identity.Name
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Minha Conta</a>
-                                <a class="dropdown-item" href="#">Alterar Senha</a>
-                                <a class="dropdown-item" asp-controller="Conta" asp-action="Logout">Sair</a>
-                            </div>
+                <ul class="navbar-nav flex-grow-1 ml-5 ">
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Produtos" asp-action="Index">Produtos</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav flex-column-reverse ">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                    <li class="dropdown">
+                        <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Ola! @User.Identity.Name
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Minha Conta</a>
+                            <a class="dropdown-item" href="#">Alterar Senha</a>
+                            <a class="dropdown-item" asp-controller="Conta" asp-action="Logout">Sair</a>
                         </div>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Conta" asp-action="Login">Login</a>
-                            </li>
-                        }
-                    </ul>
-                    <ul class="navbar-nav flex-grow-1 mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Produtos" asp-action="Index">Produtos</a>
-                        </li>
+                    </li>
+                    }
+                    else
+                    {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Conta" asp-action="Login">Login</a>
+                    </li>
+                    }
+                </ul>
 
-                    </ul>
-                </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div >
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @RenderBody()
@@ -69,7 +67,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - MaratonaAspNetCore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2019 - WAS Tecnologia
         </div>
     </footer>
 

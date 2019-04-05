@@ -3,39 +3,44 @@
 @{
     ViewBag.Title = "Login";
 }
-
-<h1>Login</h1>
-
-<form method="post">
-
-    <div class="form-group">
-        <label>Usuário</label>
-        <input type="text" asp-for="NomeLogin" class="form-control" autofocus />
-        <small>
-            <span asp-validation-for="NomeLogin"></span>
-        </small>
+<div class="container titulo col-md-3 col-sm-auto">
+    <div class="row justify-content-center">
+        <h1>Acesso ao Sistema</h1>
     </div>
+</div>
+<div class="container titulo col-md-3 col-sm-auto">
+    <div class="row justify-content-center">
+        <form method="post" >
 
-    <div class="form-group">
-        <label>Senha</label>
-        <input type="password" asp-for="Senha" class="form-control" />
-        <small>
-            <span asp-validation-for="Senha"></span>
-        </small>
+            <div class="form-group">
+                <label>Usuário</label>
+                <input type="text" asp-for="NomeLogin" class="form-control" autofocus />
+                <small>
+                    <span asp-validation-for="NomeLogin"></span>
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label>Senha</label>
+                <input type="password" asp-for="Senha" class="form-control" />
+                <small>
+                    <span asp-validation-for="Senha"></span>
+                </small>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" asp-for="Lembrar">
+                <label class="form-check-label" asp-for="Lembrar">Lembrar</label>
+            </div>
+
+            <button class="btn btn-outline-dark">Entrar</button>
+            <a asp-action="Index" asp-controller="Produtos" class="btn btn-outline-warning">Cancelar</a>
+        </form>
     </div>
+</div>
 
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" asp-for="Lembrar">
-        <label class="form-check-label" asp-for="Lembrar">Lembrar</label>
-    </div>
-
-    <button class="btn btn-dark">Entrar</button>
-    <a asp-action="Index" asp-controller="Produtos" class="btn btn-warning">Cancelar</a>
-</form>
-
-
-@section Scripts{
-    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-    <script src="~/js/methods_pt.js"></script>
-}
+            @section Scripts{
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<script src="~/js/methods_pt.js"></script>
+            }

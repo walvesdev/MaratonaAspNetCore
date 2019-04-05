@@ -34,9 +34,9 @@ namespace MaratonaAspNetCore.Services
 
                 var produtos = new List<Produto>()
                 {
-                    new Produto(){Nome="Picanha", Tipo = alimentacao, Valor= 100.00M},
-                    new Produto(){Nome="Fralda", Tipo = higiene, Valor= 30.00M},
-                    new Produto(){Nome="camisa", Tipo = vestuario, Valor = 90.00M},
+                    new Produto(){Nome="Picanha", Tipo = alimentacao, Valor= 100.00M, Descricao= "Descrição do produto."},
+                    new Produto(){Nome="Fralda", Tipo = higiene, Valor= 30.00M, Descricao= "Descrição do produto."},
+                    new Produto(){Nome="camisa", Tipo = vestuario, Valor = 90.00M, Descricao= "Descrição do produto."},
                 };
 
                 produtoRepositorio.dbset.AddRange(produtos);

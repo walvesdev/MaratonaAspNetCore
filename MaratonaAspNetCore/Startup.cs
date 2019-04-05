@@ -32,6 +32,9 @@ namespace MaratonaAspNetCore
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(opt => 
             {
                 opt.LoginPath = "/Conta/Login";
+                opt.AccessDeniedPath = "/Conta/AcessoNegado";
+                opt.Cookie.MaxAge = TimeSpan.FromHours(1);
+                opt.SlidingExpiration = true;
             });
 
             services.AddTransient<ApplicationContext>();
@@ -79,7 +82,7 @@ namespace MaratonaAspNetCore
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Produtos}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
 
             serviceProvider.GetService<DBInitializer>().Init();

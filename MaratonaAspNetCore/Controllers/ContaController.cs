@@ -27,6 +27,12 @@ namespace MaratonaAspNetCore.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM login)
         {
+            if (login == null || string.IsNullOrEmpty(login.NomeLogin) || string.IsNullOrEmpty(login.Senha))
+            {
+                ModelState.AddModelError("NomeLogin", "Digite um nome de usuário!");
+                ModelState.AddModelError("Senha", "Digite uma senha!!");
+                return View();
+            }
             var usuario = banco.dbset.FirstOrDefault(u => u.NomeLogin.ToLower() == login.NomeLogin.ToLower());
 
             if (usuario == null)
@@ -52,6 +58,7 @@ namespace MaratonaAspNetCore.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties()
                 {
                     IsPersistent = login.Lembrar
+                    
                 });
 
                 if (!string.IsNullOrEmpty(login.ReturnUrl) && Url.IsLocalUrl(login.ReturnUrl))
@@ -70,7 +77,10 @@ namespace MaratonaAspNetCore.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Conta");
         }
-
+         public IActionResult AcessoNegado()
+        {
+            return View();
+        }
 
     }
 }
